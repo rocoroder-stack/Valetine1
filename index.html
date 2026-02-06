@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Pratibha ❤️</title>
+    <style>
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ffccd5;
+            --text-dark: #590d22;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #fff0f3 0%, var(--secondary) 100%);
+            font-family: 'Georgia', serif;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* --- LOADING ANIMATION --- */
+        #loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #fff0f3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        .heart-loader {
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            position: relative;
+            transform: rotate(45deg);
+            animation: pulse 1.2s infinite;
+        }
+
+        .heart-loader::before, .heart-loader::after {
+            content: "";
+            width: 100px;
+            height: 100px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart-loader::before { top: -50px; left: 0; }
+        .heart-loader::after { left: -50px; top: 0; }
+
+        @keyframes pulse {
+            0% { transform: rotate(45deg) scale(0.8); }
+            50% { transform: rotate(45deg) scale(1.2); }
+            100% { transform: rotate(45deg) scale(0.8); }
+        }
+
+        /* --- MAIN UI --- */
+        #proposal-ui {
+            display: none; /* Shown after loader */
+            z-index: 10;
+            padding: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 40px;
+        }
+
+        .btn-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            height: 150px;
+            position: relative;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+        }
+
+        #yesBtn { background: var(--primary); color: white; z-index: 5; }
+        #noBtn { 
+            background: #adb5bd; 
+            color: white; 
+            position: absolute; 
+            z-index: 4; 
+            transition: 0.15s;
+        }
+
+        /* --- CELEBRATION --- */
+        #celebration-ui {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100vh;
+            padding: 20px;
+            background: #fff0f3;
+        }
+
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            max-width: 350px;
+            aspect-ratio: 1/1;
+            margin: 20px auto;
+            border: 8px solid white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .slides {
+            display: none;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fadeIn 1s;
+        }
+
+        .quote-box { min-height: 100px; padding: 20px; }
+        .love-quote { font-size: 1.2rem; color: var(--text-dark); font-style: italic; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .heart-particle {
+            position: fixed;
+            top: -10%;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="heart-loader"></div>
+        <p style="margin-top: 70px; color: #ff4d6d; font-weight: bold;">Loading something special for Pratibha...</p>
+    </div>
+
+    <audio id="loveMusic" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Music.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="proposal-ui">
+        <h1>Hey Pratibha, <br>Will you be my Valentine? ❤️</h1>
+        <div class="btn-wrap">
+            <button id="yesBtn" onclick="showLove()">YES!</button>
+            <button id="noBtn" onmouseover="runAway()" onclick="runAway()">NO</button>
+        </div>
+    </div>
+
+    <div id="celebration-ui">
+        <h1 style="margin: 20px 0;">I Love You, Pratibha! 🌹</h1>
+        <div class="slideshow-container">
+            <img class="slides" src="https://drive.google.com/uc?export=view&id=1RkL5xUYmreomXKxNecuFm4_dKrAJmHqm">
+            <img class="slides" src="https://drive.google.com/uc?export=view&id=1NWAauzyIiQs1kqC8pQQuBjf9NU1HiONI">
+            <img class="slides" src="https://drive.google.com/uc?export=view&id=1n5gVnwNMIBPfC3KwM6jY7PVdNgCgELlq">
+            <img class="slides" src="https://drive.google.com/uc?export=view&id=1p4S67-P6tBqY7T8S0q2_zR0R7q8J8X2e">
+        </div>
+        <div class="quote-box">
+            <p id="quoteText" class="love-quote"></p>
+        </div>
+    </div>
+
+    <script>
+        // 1. Loader Logic
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('proposal-ui').style.display = 'block';
+            }, 2500); // 2.5 seconds loading
+        };
+
+        const quotes = [
+            "Pratibha, you are my lucky charm! 🍀✨💖",
+            "With you, I see my future secure and beautiful. 🌅💍",
+            "Your love and care make me feel I can conquer the world. 🌍🦁🔥",
+            "I want to make cute cute babies with you, my love! 👶🍼🧸",
+            "You are my heart and soul. ♾️❤️",
+            "My life is a dream because of you. 🌸😻"
+        ];
+
+        function runAway() {
+            const btn = document.getElementById('noBtn');
+            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 50);
+            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 50);
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+        }
+
+        function showLove() {
+            document.getElementById('proposal-ui').style.display = 'none';
+            document.getElementById('celebration-ui').style.display = 'flex';
+            
+            // Start Music
+            const music = document.getElementById('loveMusic');
+            music.play();
+
+            startSlideshow();
+            spawnHearts();
+        }
+
+        let currentIdx = 0;
+        function startSlideshow() {
+            const slides = document.getElementsByClassName("slides");
+            const textElement = document.getElementById("quoteText");
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            currentIdx++;
+            if (currentIdx > slides.length) { currentIdx = 1; }
+            slides[currentIdx - 1].style.display = "block";
+            textElement.innerText = quotes[(currentIdx - 1) % quotes.length];
+            setTimeout(startSlideshow, 4000); 
+        }
+
+        function spawnHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart-particle');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
