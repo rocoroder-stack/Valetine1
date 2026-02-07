@@ -1,247 +1,654 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Pratibha ❤️</title>
+    <title>For My Soulmate, Pratibha ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #ff4d6d;
-            --secondary: #ffccd5;
-            --text-dark: #590d22;
+        /* ====== 全局样式 ====== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Arial Rounded MT Bold', 'Georgia', serif;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ffafcc, #ffc8dd, #cdb4db, #bde0fe);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #fff0f3 0%, var(--secondary) 100%);
-            font-family: 'Georgia', serif;
-            overflow: hidden;
-            text-align: center;
+            overflow-x: hidden;
+            color: #590d22;
+            padding: 20px;
         }
 
-        /* --- LOADING ANIMATION --- */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* ====== 加载界面 ====== */
         #loader {
             position: fixed;
-            width: 100%;
-            height: 100%;
-            background: #fff0f3;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(#ffccd5, #fff0f3);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999;
+            z-index: 1000;
+            transition: opacity 1s ease;
         }
 
-        .heart-loader {
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary);
-            position: relative;
-            transform: rotate(45deg);
-            animation: pulse 1.2s infinite;
+        .loader-heart {
+            font-size: 5rem;
+            color: #ff4d6d;
+            margin-bottom: 30px;
+            animation: heartbeat 1.2s infinite ease-in-out;
         }
 
-        .heart-loader::before, .heart-loader::after {
-            content: "";
-            width: 100px;
-            height: 100px;
-            background-color: var(--primary);
-            border-radius: 50%;
-            position: absolute;
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
         }
 
-        .heart-loader::before { top: -50px; left: 0; }
-        .heart-loader::after { left: -50px; top: 0; }
-
-        @keyframes pulse {
-            0% { transform: rotate(45deg) scale(0.8); }
-            50% { transform: rotate(45deg) scale(1.2); }
-            100% { transform: rotate(45deg) scale(0.8); }
-        }
-
-        /* --- MAIN UI --- */
+        /* ====== 主求婚界面 ====== */
         #proposal-ui {
-            display: none; /* Shown after loader */
+            display: none;
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.92);
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(89, 13, 34, 0.25);
+            backdrop-filter: blur(10px);
+            border: 3px solid #ffccd5;
+            position: relative;
             z-index: 10;
-            padding: 20px;
         }
 
-        h1 {
-            color: var(--primary);
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            margin-bottom: 40px;
+        .title {
+            color: #ff4d6d;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 0px #ffccd5;
+        }
+
+        .subtitle {
+            color: #a4133c;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            margin-bottom: 50px;
+            font-weight: 300;
+            font-style: italic;
         }
 
         .btn-wrap {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 20px;
-            height: 150px;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 50px;
+            min-height: 120px;
             position: relative;
         }
 
-        button {
-            padding: 15px 35px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
+        .love-btn {
+            padding: 20px 50px;
+            font-size: 1.8rem;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.3);
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            z-index: 5;
+            position: relative;
         }
 
-        #yesBtn { background: var(--primary); color: white; z-index: 5; }
-        #noBtn { 
-            background: #adb5bd; 
-            color: white; 
-            position: absolute; 
-            z-index: 4; 
-            transition: 0.15s;
+        #yesBtn {
+            background: linear-gradient(145deg, #ff4d6d, #ff758f);
+            color: white;
+            border: 4px solid #ffccd5;
         }
 
-        /* --- CELEBRATION --- */
+        #yesBtn:hover {
+            transform: scale(1.15) rotate(-5deg);
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.5);
+        }
+
+        #noBtn {
+            background: linear-gradient(145deg, #adb5bd, #6c757d);
+            color: white;
+            border: 4px solid #dee2e6;
+            position: absolute;
+        }
+
+        #noBtn:hover {
+            transform: scale(1.05);
+        }
+
+        .instructions {
+            margin-top: 30px;
+            color: #6c757d;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* ====== 庆祝界面 ====== */
         #celebration-ui {
             display: none;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            height: 100vh;
-            padding: 20px;
-            background: #fff0f3;
-        }
-
-        .slideshow-container {
+            max-width: 1000px;
+            text-align: center;
             position: relative;
-            width: 100%;
-            max-width: 350px;
-            aspect-ratio: 1/1;
-            margin: 20px auto;
-            border: 8px solid white;
+            z-index: 10;
+            animation: fadeIn 1.5s;
+        }
+
+        .main-heading {
+            color: #ff4d6d;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            margin-bottom: 20px;
+            text-shadow: 4px 4px 0px #ffccd5;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 40px;
+            border-radius: 30px;
+            border: 5px dashed #ff758f;
+        }
+
+        .dynamic-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            color: #a4133c;
+            margin: 30px 0;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            overflow: hidden;
+            border-left: 8px solid #ff4d6d;
+            border-right: 8px solid #ff4d6d;
         }
 
-        .slides {
-            display: none;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            animation: fadeIn 1s;
+        /* 互动爱心游戏 */
+        .love-game-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            margin: 30px 0;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 4px solid #ffafcc;
         }
 
-        .quote-box { min-height: 100px; padding: 20px; }
-        .love-quote { font-size: 1.2rem; color: var(--text-dark); font-style: italic; }
+        .love-counter {
+            font-size: 2.5rem;
+            color: #ff4d6d;
+            margin-bottom: 20px;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #clickHeart {
+            font-size: 6rem;
+            cursor: pointer;
+            transition: transform 0.1s;
+            color: #ff4d6d;
+            display: block;
+            margin: 0 auto 20px;
+            filter: drop-shadow(0 5px 10px rgba(255, 77, 109, 0.5));
+        }
 
+        #clickHeart:active {
+            transform: scale(0.8);
+        }
+
+        /* 誓言区域 */
+        .vows-container {
+            background: linear-gradient(to right, rgba(255, 140, 161, 0.1), rgba(205, 180, 219, 0.1));
+            padding: 40px;
+            border-radius: 25px;
+            margin: 40px 0;
+            width: 90%;
+            max-width: 700px;
+            border-top: 6px solid #ff4d6d;
+            border-bottom: 6px solid #ff4d6d;
+        }
+
+        .vows-container h3 {
+            color: #a4133c;
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .vows {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #333;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        .vows p {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #ffafcc;
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        /* 情话泡泡 */
+        .love-chat {
+            background: white;
+            padding: 25px;
+            border-radius: 25px;
+            margin-top: 30px;
+            width: 90%;
+            max-width: 600px;
+            border: 3px solid #bde0fe;
+            position: relative;
+        }
+
+        .love-chat h3 {
+            color: #3a86ff;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        #loveMessage {
+            font-size: 1.4rem;
+            color: #590d22;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            font-style: italic;
+            border: 2px dotted #cdb4db;
+        }
+
+        #newMessageBtn {
+            margin-top: 20px;
+            padding: 12px 25px;
+            background: #3a86ff;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ====== 飘落的心形粒子 ====== */
         .heart-particle {
             position: fixed;
             top: -10%;
+            font-size: 1.5rem;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.7;
             animation: fall linear forwards;
         }
-        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* ====== 点击爱心特效 ====== */
+        .click-effect {
+            position: fixed;
+            pointer-events: none;
+            font-size: 2rem;
+            z-index: 100;
+            animation: floatUp 1s forwards;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) scale(1.5);
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .btn-wrap {
+                flex-direction: column;
+                gap: 20px;
+            }
+            #noBtn {
+                position: relative;
+            }
+            .love-btn {
+                padding: 18px 35px;
+                font-size: 1.5rem;
+            }
+            .vows-container, .love-game-container, .love-chat {
+                padding: 20px;
+                width: 95%;
+            }
+        }
     </style>
 </head>
 <body>
-
+    <!-- ====== 加载界面 ====== -->
     <div id="loader">
-        <div class="heart-loader"></div>
-        <p style="margin-top: 70px; color: #ff4d6d; font-weight: bold;">Loading something special for Pratibha...</p>
+        <div class="loader-heart"><i class="fas fa-heart"></i></div>
+        <h2 style="color: #ff4d6d;">Creating a world just for Pratibha...</h2>
+        <p style="margin-top: 20px; color: #a4133c; max-width: 500px;">Loading infinite love, memories, and promises 💖</p>
     </div>
 
-    <audio id="loveMusic" loop>
-        <source src="https://www.chosic.com/wp-content/uploads/2021/04/And-So-It-Begins-Inspired-By-Crush-Music.mp3" type="audio/mpeg">
+    <!-- ====== 背景音乐 ====== -->
+    <audio id="bgMusic" loop>
+        <source src="https://assets.mixkit.co/music/preview/mixkit-romantic-sunset-687.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="clickSound">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- ====== 主求婚界面 ====== -->
     <div id="proposal-ui">
-        <h1>Hey Pratibha, <br>Will you be my Valentine? ❤️</h1>
+        <h1 class="title">My Dearest Pratibha 💕</h1>
+        <h2 class="subtitle">You are the most beautiful part of my story...</h2>
+        
         <div class="btn-wrap">
-            <button id="yesBtn" onclick="showLove()">YES!</button>
-            <button id="noBtn" onmouseover="runAway()" onclick="runAway()">NO</button>
+            <button class="love-btn" id="yesBtn" onclick="startCelebration()">
+                <i class="fas fa-heart"></i> YES, FOREVER! <i class="fas fa-heart"></i>
+            </button>
+            <button class="love-btn" id="noBtn" onmouseover="runAway()" ontouchstart="runAwayMobile()">
+                <i class="fas fa-frown"></i> NO
+            </button>
         </div>
+        
+        <p class="instructions">(Hint: "No" is just a shy button. Your true answer is waiting in your heart!)</p>
     </div>
 
+    <!-- ====== 庆祝界面 ====== -->
     <div id="celebration-ui">
-        <h1 style="margin: 20px 0;">I Love You, Pratibha! 🌹</h1>
-        <div class="slideshow-container">
-            <img class="slides" src="https://drive.google.com/uc?export=view&id=1RkL5xUYmreomXKxNecuFm4_dKrAJmHqm">
-            <img class="slides" src="https://drive.google.com/uc?export=view&id=1NWAauzyIiQs1kqC8pQQuBjf9NU1HiONI">
-            <img class="slides" src="https://drive.google.com/uc?export=view&id=1n5gVnwNMIBPfC3KwM6jY7PVdNgCgELlq">
-            <img class="slides" src="https://drive.google.com/uc?export=view&id=1p4S67-P6tBqY7T8S0q2_zR0R7q8J8X2e">
+        <h1 class="main-heading"><i class="fas fa-star"></i> I LOVE YOU, PRATIBHA! <i class="fas fa-star"></i></h1>
+        
+        <!-- 动态爱意标题 -->
+        <div class="dynamic-title" id="dynamicTitle">
+            My life began the day I met you...
         </div>
-        <div class="quote-box">
-            <p id="quoteText" class="love-quote"></p>
+        
+        <!-- 互动爱心游戏 -->
+        <div class="love-game-container">
+            <h3><i class="fas fa-gamepad"></i> Our Love Clicker Game</h3>
+            <p>Every click adds more love to our journey!</p>
+            <div class="love-counter">Love Collected: <span id="loveCount">0</span> ❤️</div>
+            <div id="clickHeart">❤️</div>
+            <p>Click the heart as many times as you love me!</p>
+        </div>
+        
+        <!-- 誓言区域 -->
+        <div class="vows-container">
+            <h3><i class="fas fa-scroll"></i> My Promises To You</h3>
+            <div class="vows">
+                <p>I promise to choose you every single day, through every up and down.</p>
+                <p>I promise to be your safe place, your biggest supporter, and your best friend.</p>
+                <p>I promise to build a future with you filled with laughter, cute babies 👶, and endless adventures.</p>
+                <p>I promise to cherish every moment, from the ordinary to the extraordinary.</p>
+                <p>I promise my love for you will only grow stronger with each passing year.</p>
+                <p>Most of all, I promise to be the man you deserve, today and always.</p>
+            </div>
+        </div>
+        
+        <!-- 情话泡泡 -->
+        <div class="love-chat">
+            <h3><i class="fas fa-comment-heart"></i> Messages From My Heart</h3>
+            <div id="loveMessage">"You are my lucky charm, my strength, and my forever."</div>
+            <button id="newMessageBtn" onclick="newLoveMessage()">
+                <i class="fas fa-redo"></i> Another Love Note
+            </button>
+        </div>
+        
+        <!-- 最终信息 -->
+        <div style="margin: 50px 0; padding: 25px; background: rgba(255, 255, 255, 0.9); border-radius: 20px; max-width: 700px;">
+            <h3 style="color: #ff4d6d; font-size: 2rem;">Thank you for being YOU.</h3>
+            <p style="font-size: 1.3rem; margin-top: 15px; color: #333;">
+                This page holds only a fraction of what I feel for you.<br>
+                My love for you is endless, just like this celebration. 💫<br><br>
+                Forever yours, with all my heart.
+            </p>
         </div>
     </div>
 
     <script>
-        // 1. Loader Logic
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('proposal-ui').style.display = 'block';
-            }, 2500); // 2.5 seconds loading
-        };
-
-        const quotes = [
-            "Pratibha, you are my lucky charm! 🍀✨💖",
-            "With you, I see my future secure and beautiful. 🌅💍",
-            "Your love and care make me feel I can conquer the world. 🌍🦁🔥",
-            "I want to make cute cute babies with you, my love! 👶🍼🧸",
-            "You are my heart and soul. ♾️❤️",
-            "My life is a dream because of you. 🌸😻"
+        // ====== 全局变量 ======
+        let loveCount = 0;
+        let titleIndex = 0;
+        const dynamicTitles = [
+            "My life began the day I met you...",
+            "You are my heart, my soul, my everything. ♾️❤️",
+            "With you, I've found my forever. 🌅💍",
+            "Every moment with you is a precious dream. 🌸😻",
+            "You make me believe in magic. ✨",
+            "I want to build a beautiful life with you. 👶🍼🧸",
+            "Your love is my greatest strength. 🌍🦁🔥",
+            "I fall for you more every single day. 💫"
+        ];
+        const loveMessages = [
+            '"You are my lucky charm! Every day with you feels blessed. 🍀✨"',
+            '"Your smile is my favorite view, your laugh my favorite sound. 🎵"',
+            '"I never knew happiness could feel like this until I met you. 💕"',
+            '"Loving you is the easiest and most wonderful thing I do. 💖"',
+            '"You are the missing piece I didn’t know I was searching for. 🧩"',
+            '"My favorite place in the world is right next to you. 🗺️"',
+            '"I could spend a thousand lifetimes with you and it still wouldn’t be enough. ⏳"',
+            '"You are the reason I believe in forever. 🌟"'
         ];
 
+        // ====== 初始化 ======
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('proposal-ui').style.display = 'block';
+                    spawnHearts(15); // 初始心形
+                }, 1000);
+            }, 3000);
+        };
+
+        // ====== 逃跑的"NO"按钮 ======
         function runAway() {
             const btn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - btn.offsetWidth - 50);
-            const y = Math.random() * (window.innerHeight - btn.offsetHeight - 50);
+            const container = document.querySelector('.btn-wrap');
+            const maxX = window.innerWidth - btn.offsetWidth - 50;
+            const maxY = window.innerHeight - btn.offsetHeight - 50;
+            const x = Math.max(20, Math.min(maxX, Math.random() * maxX));
+            const y = Math.max(20, Math.min(maxY, Math.random() * maxY));
+            
+            btn.style.position = 'fixed';
             btn.style.left = x + 'px';
             btn.style.top = y + 'px';
+            
+            // 添加旋转效果
+            btn.style.transform = `rotate(${Math.random() * 30 - 15}deg)`;
+            
+            // 变化文本
+            const messages = ["Try YES! 😉", "Follow your heart! 💖", "Say YES! 😊", "Don't click me! 🥺"];
+            btn.innerHTML = `<i class="fas fa-frown"></i> ${messages[Math.floor(Math.random() * messages.length)]}`;
         }
 
-        function showLove() {
+        function runAwayMobile(event) {
+            runAway();
+            if (event) event.preventDefault();
+        }
+
+        // ====== 开始庆祝 ======
+        function startCelebration() {
             document.getElementById('proposal-ui').style.display = 'none';
             document.getElementById('celebration-ui').style.display = 'flex';
             
-            // Start Music
-            const music = document.getElementById('loveMusic');
-            music.play();
-
-            startSlideshow();
-            spawnHearts();
+            // 播放音乐
+            const music = document.getElementById('bgMusic');
+            music.volume = 0.6;
+            music.play().catch(e => {
+                console.log("Autoplay blocked. User interaction needed.");
+                document.body.onclick = () => {
+                    music.play();
+                    document.body.onclick = null;
+                };
+            });
+            
+            // 开始动态效果
+            startDynamicTitle();
+            setupLoveGame();
+            spawnHearts(30);
+            
+            // 初始情话
+            newLoveMessage();
         }
 
-        let currentIdx = 0;
-        function startSlideshow() {
-            const slides = document.getElementsByClassName("slides");
-            const textElement = document.getElementById("quoteText");
-            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-            currentIdx++;
-            if (currentIdx > slides.length) { currentIdx = 1; }
-            slides[currentIdx - 1].style.display = "block";
-            textElement.innerText = quotes[(currentIdx - 1) % quotes.length];
-            setTimeout(startSlideshow, 4000); 
-        }
-
-        function spawnHearts() {
+        // ====== 动态标题 ======
+        function startDynamicTitle() {
+            const titleElement = document.getElementById('dynamicTitle');
             setInterval(() => {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-particle');
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
-                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
-                document.body.appendChild(heart);
-                setTimeout(() => { heart.remove(); }, 5000);
+                titleIndex = (titleIndex + 1) % dynamicTitles.length;
+                titleElement.style.opacity = 0;
+                setTimeout(() => {
+                    titleElement.textContent = dynamicTitles[titleIndex];
+                    titleElement.style.opacity = 1;
+                }, 500);
+            }, 4000);
+        }
+
+        // ====== 爱心点击游戏 ======
+        function setupLoveGame() {
+            const clickHeart = document.getElementById('clickHeart');
+            const loveCountElement = document.getElementById('loveCount');
+            const clickSound = document.getElementById('clickSound');
+            
+            clickHeart.onclick = function(event) {
+                loveCount++;
+                loveCountElement.textContent = loveCount;
+                
+                // 播放音效
+                clickSound.currentTime = 0;
+                clickSound.play().catch(e => console.log("Sound error"));
+                
+                // 创建点击特效
+                createClickEffect(event.clientX, event.clientY);
+                
+                // 每10次点击增加鼓励信息
+                if (loveCount % 10 === 0) {
+                    const messages = ["Wow! So much love! 💘", "You're amazing! 💕", "My heart is overflowing! 🥰", "Infinite love for you! 💖"];
+                    alert(messages[Math.floor(Math.random() * messages.length)]);
+                }
+                
+                // 心跳动画
+                this.style.transform = 'scale(1.3)';
+                setTimeout(() => this.style.transform = 'scale(1)', 200);
+            };
+        }
+
+        // ====== 点击特效 ======
+        function createClickEffect(x, y) {
+            const effects = ['❤️', '💖', '💕', '💗', '💓', '💞'];
+            const effect = document.createElement('div');
+            effect.className = 'click-effect';
+            effect.textContent = effects[Math.floor(Math.random() * effects.length)];
+            effect.style.left = (x - 20) + 'px';
+            effect.style.top = (y - 20) + 'px';
+            document.body.appendChild(effect);
+            
+            setTimeout(() => effect.remove(), 1000);
+        }
+
+        // ====== 新情话 ======
+        function newLoveMessage() {
+            const messageElement = document.getElementById('loveMessage');
+            const currentMessage = messageElement.textContent;
+            let newMessage;
+            
+            do {
+                newMessage = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+            } while (newMessage === currentMessage && loveMessages.length > 1);
+            
+            messageElement.style.opacity = 0;
+            setTimeout(() => {
+                messageElement.textContent = newMessage;
+                messageElement.style.opacity = 1;
             }, 300);
+        }
+
+        // ====== 飘落的心形 ======
+        function spawnHearts(count) {
+            const heartEmojis = ['❤️', '💖', '💕', '💗', '💓', '💞', '💘', '💝'];
+            
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                    heart.style.opacity = Math.random() * 0.6 + 0.4;
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                    }, 8000);
+                }, i * 300);
+            }
+            
+            // 持续生成
+            setInterval(() => {
+                if (document.getElementById('celebration-ui').style.display === 'flex') {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart-particle';
+                    heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                    heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                    heart.style.opacity = Math.random() * 0.5 + 0.3;
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        if (heart.parentNode) heart.remove();
+                    }, 10000);
+                }
+            }, 1500);
         }
     </script>
 </body>
